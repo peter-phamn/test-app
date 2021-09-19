@@ -362,7 +362,7 @@ const App: FC = () => {
                 return (
                   <>
                     <Row className="tree-select__action-view">
-                      <Col span={24} md={{ span: 18 }}>
+                      <Col span={24} md={{ span: 16 }}>
                         <Search
                           allowClear
                           placeholder="Search"
@@ -371,7 +371,7 @@ const App: FC = () => {
                       </Col>
                       <Col
                         span={24}
-                        md={{ span: 6 }}
+                        md={{ span: 8 }}
                         className="tree-select__button-view"
                       >
                         <Button block type="primary" onClick={onAddFolder}>
