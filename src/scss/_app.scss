@@ -24,6 +24,22 @@
   background-color: #fff;
 }
 
+.copy-data-container {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  &__action-view {
+    width: 50%;
+    margin-top: 32px;
+    justify-content: flex-end;
+    display: flex;
+  }
+  &__cancel-button {
+    margin-right: 16px;
+  }
+}
+
 .tag-input {
   width: 78px;
   margin-right: 8px;
@@ -45,6 +61,9 @@
     position: sticky;
     background-color: #fff;
     z-index: 5;
+  }
+  &__button-view {
+    padding: 8px 0px 0px 0px;
   }
 }
 
@@ -73,5 +92,12 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .tree-select__button-view {
+    padding: 0px 0px 0px 8px;
   }
 }

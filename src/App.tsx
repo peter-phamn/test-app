@@ -11,13 +11,14 @@ import { Button, TreeSelect, Input, Row, Col, Layout } from "antd";
 import { DataNode, EventDataNode } from "antd/lib/tree";
 import { RefTreeSelectProps } from "antd/lib/tree-select";
 import ForwardDirectoryTree from "antd/lib/tree/DirectoryTree";
+import { Content, Header } from "antd/lib/layout/layout";
 import debounce from "lodash/debounce";
 import findIndex from "lodash/findIndex";
+
 import { folderService } from "./services";
 import { Folder, FolderProperties } from "./model/Folder";
 import FolderCreationForm from "./components/FolderCreationForm";
 import { propertiesLabel } from "./assets/PropertiesLabel";
-import { Content, Header } from "antd/lib/layout/layout";
 
 const { Search } = Input;
 
@@ -117,8 +118,8 @@ const App: FC = () => {
     } = info;
     const selectedFolder = getFolderFromKey(key.toString(), folders);
     setSelectedFolder(selectedFolder);
-    setShowFolderSelection(false);
     treeRef.current?.blur();
+    setShowFolderSelection(false);
   };
 
   const onSearchFolder = useCallback(
@@ -348,58 +349,68 @@ const App: FC = () => {
               onClick={() => setShowFolderSelection(false)}
             />
           )}
-          <TreeSelect
-            ref={treeRef}
-            className="tree-select"
-            onFocus={() => setShowFolderSelection(true)}
-            open={showFolderSelection}
-            dropdownClassName="tree-select__drop-down"
-            value={selectedFolder?.title}
-            placeholder="Please select folder"
-            dropdownRender={() => {
-              return (
-                <>
-                  <Row className="tree-select__action-view">
-                    <Col span={20}>
-                      <Search
-                        allowClear
-                        placeholder="Search"
-                        onChange={debouncedChangeTextHandler}
-                      />
-                    </Col>
-                    <Col span={4}>
-                      <Row align="middle" justify="center">
-                        <Button type="primary" onClick={onAddFolder}>
+          <div className="copy-data-container">
+            <TreeSelect
+              ref={treeRef}
+              className="tree-select"
+              onFocus={() => setShowFolderSelection(true)}
+              open={showFolderSelection}
+              dropdownClassName="tree-select__drop-down"
+              value={selectedFolder?.title}
+              placeholder="Please select folder"
+              dropdownRender={() => {
+                return (
+                  <>
+                    <Row className="tree-select__action-view">
+                      <Col span={24} md={{ span: 18 }}>
+                        <Search
+                          allowClear
+                          placeholder="Search"
+                          onChange={debouncedChangeTextHandler}
+                        />
+                      </Col>
+                      <Col
+                        span={24}
+                        md={{ span: 6 }}
+                        className="tree-select__button-view"
+                      >
+                        <Button block type="primary" onClick={onAddFolder}>
                           Add Folder
                         </Button>
-                      </Row>
-                    </Col>
-                  </Row>
-                  <Row className="tree-select__folder-creation-view">
-                    <Col span={24}>
-                      {pendingFolders.map((pendingFolder) => (
-                        <FolderCreationForm
-                          onDelete={onDeleteNewFolder}
-                          key={pendingFolder.key}
-                          onSave={onSaveNewFolder}
-                          folder={pendingFolder}
-                        />
-                      ))}
-                    </Col>
-                  </Row>
-                  <ForwardDirectoryTree
-                    draggable
-                    onExpand={onExpand}
-                    autoExpandParent={autoExpandParent}
-                    expandedKeys={expandedKeys}
-                    onSelect={onSelectFolder}
-                    onDrop={onDragDrop}
-                    treeData={loop(rootFolders)}
-                  />
-                </>
-              );
-            }}
-          />
+                      </Col>
+                    </Row>
+                    <Row className="tree-select__folder-creation-view">
+                      <Col span={24}>
+                        {pendingFolders.map((pendingFolder) => (
+                          <FolderCreationForm
+                            onDelete={onDeleteNewFolder}
+                            key={pendingFolder.key}
+                            onSave={onSaveNewFolder}
+                            folder={pendingFolder}
+                          />
+                        ))}
+                      </Col>
+                    </Row>
+                    <ForwardDirectoryTree
+                      draggable
+                      onExpand={onExpand}
+                      autoExpandParent={autoExpandParent}
+                      expandedKeys={expandedKeys}
+                      onSelect={onSelectFolder}
+                      onDrop={onDragDrop}
+                      treeData={loop(rootFolders)}
+                    />
+                  </>
+                );
+              }}
+            />
+            <div className="copy-data-container__action-view">
+              <Button className="copy-data-container__cancel-button">
+                Cancel
+              </Button>
+              <Button type="primary">Save</Button>
+            </div>
+          </div>
         </Content>
       </Layout>
     </div>
