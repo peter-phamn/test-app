@@ -1,0 +1,43 @@
+.form {
+  padding-inline: 32px;
+  transition: ease background-color 250ms;
+  &:hover {
+    background-color: #f5f5f5;
+  }
+  &__folder-icon {
+    color: #000000;
+    font-size: 14px;
+  }
+  &__action-view {
+    margin-inline-end: 20px;
+    margin-inline-start: 20px;
+  }
+  &__select {
+    width: 100%;
+    margin-block-end: 8px;
+    margin-block-start: 8px;
+  }
+  &__tag {
+    background-color: #fff;
+    padding: 4px;
+    margin-bottom: 8px;
+    width: 100%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #00000030;
+  }
+  &__icon-view {
+    padding: 0px 16px 16px 0px;
+  }
+  &__action-icon {
+    font-size: 32px;
+    margin-inline-end: 4px;
+    margin-inline-start: 4px;
+    &--danger {
+      color: red;
+    }
+    &--primary {
+      color: $primary;
+    }
+  }
+}
